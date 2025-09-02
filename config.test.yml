@@ -1,0 +1,15 @@
+app:
+  name: "pos-app"
+  port: "8080"
+
+db:
+  host: "localhost"
+  port: "5432"
+  username: "postgres"
+  password: "password"
+  database: "pos-app"
+  sslmode: "disable"
+  max_idle_conns: 10
+  max_open_conns: 25
+  max_lifetime: 60
+  max_idle_time: 60
