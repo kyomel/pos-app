@@ -1,8 +1,11 @@
 package main
 
 import (
+	"log/slog"
+	"os"
+
 	"github.com/kyomel/pos-app/internal/config"
-	"github.com/kyomel/pos-app/internal/infra/database"
+	"github.com/kyomel/pos-app/internal/server"
 )
 
 func main() {
@@ -11,12 +14,14 @@ func main() {
 		panic(err)
 	}
 
-	cfg := config.GetConfig()
+	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelInfo,
+	})
 
-	db, err := database.ConnectPostgres(cfg.DB)
-	if err != nil {
+	log := slog.New(logHandler)
+	slog.SetDefault(log)
+
+	if err := server.Start(); err != nil {
 		panic(err)
 	}
-
-	_ = db
 }
