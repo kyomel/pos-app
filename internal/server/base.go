@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/kyomel/pos-app/apps/auth"
 	"github.com/kyomel/pos-app/internal/config"
 	"github.com/kyomel/pos-app/internal/infra/database"
 )
@@ -17,9 +18,10 @@ func Start() error {
 		return err
 	}
 
-	_ = db
-
 	router := chi.NewRouter()
+
+	// Add routes here
+	auth.InitModule(router, db)
 
 	slog.Info("server "+cfg.App.Name, slog.String("port", cfg.App.Port))
 	http.ListenAndServe(":"+cfg.App.Port, router)

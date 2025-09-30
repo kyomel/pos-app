@@ -1,0 +1,95 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.out
+*.bin
+
+# Test binary, build with `go test -c`
+*.test
+
+# Cross-compilation binary
+*[_.]exe
+
+# Dependency / Vendor directories
+vendor/
+vendor-override/
+
+# Go workspace file (if using workspaces)
+go.work
+go.work.sum
+
+# Output of the commands go list -m -f {{.Dir}}
+# and go list -f {{.Target}}
+*.mod
+*.sum
+
+# Coverage
+*.coverprofile
+
+# Tools
+tools/vendor/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.tmp
+*.bak
+*.log
+
+# Build artifacts
+tmp/
+tmp/main
+tmp/
+build/
+dist/
+
+# Local configuration files
+config.local.yml
+.env
+.env.local
+*.env
+
+# Air live reload (from .air.toml)
+tmp/
+build-errors.log
+
+# Database files (if using local storage)
+*.db
+*.db-journal
+
+# Logs
+log/
+logs/
+*.log
+
+# Processed assets
+public/dist/
+assets/css/
+assets/js/
+
+# Docker build files
+.dockerignore
+.docker/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local environment specific files
+local/
+.env*
+
+# Development tools cache
+.gocache/

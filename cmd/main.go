@@ -15,7 +15,7 @@ func main() {
 	}
 
 	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelInfo,
+		Level: slog.LevelDebug,
 	})
 
 	log := slog.New(logHandler)
