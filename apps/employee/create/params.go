@@ -1,6 +1,10 @@
 package create
 
-import "github.com/kyomel/pos-app/internal/constant"
+import (
+	"github.com/kyomel/pos-app/internal/constant"
+	"github.com/kyomel/pos-app/internal/utils/encryption"
+	"github.com/kyomel/pos-app/internal/utils/generator"
+)
 
 type CreateEmployeeRequest struct {
 	Name     string `json:"name"`
@@ -24,4 +28,27 @@ func (r CreateEmployeeRequest) Validate() error {
 	}
 
 	return nil
+}
+
+func (r CreateEmployeeRequest) ToAuthModel() (auth Auth) {
+	hashed, _ := encryption.GenerateFromPassword(r.Password)
+	auth = Auth{
+		PublicId: generator.GeneratePublicId(),
+		Email:    r.Email,
+		Password: hashed,
+		Role:     r.Role,
+		IsActive: true,
+	}
+
+	return
+}
+
+func (r CreateEmployeeRequest) ToEmployeeModel(authId string) (employee Employee) {
+	employee = Employee{
+		PublicId: generator.GeneratePublicId(),
+		Name:     r.Name,
+		Profile:  r.Profile,
+		AuthId:   authId,
+	}
+	return
 }
