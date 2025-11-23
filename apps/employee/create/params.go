@@ -4,6 +4,7 @@ import (
 	"github.com/kyomel/pos-app/internal/constant"
 	"github.com/kyomel/pos-app/internal/utils/encryption"
 	"github.com/kyomel/pos-app/internal/utils/generator"
+	"github.com/kyomel/pos-app/internal/utils/validation"
 )
 
 type CreateEmployeeRequest struct {
@@ -25,6 +26,10 @@ func (r CreateEmployeeRequest) Validate() error {
 
 	if !constant.IsRoleCanBeCreated(r.Role) {
 		return errRoleIsNotSupported
+	}
+
+	if !validation.IsValidEmail(r.Email) {
+		return errEmailIsNotValid
 	}
 
 	return nil

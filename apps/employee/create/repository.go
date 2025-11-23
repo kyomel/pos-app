@@ -21,12 +21,43 @@ func (r repository) Commit(ctx context.Context, tx *sql.Tx) (err error) {
 
 // CreateAuth implements repoContract.
 func (r repository) CreateAuth(ctx context.Context, tx *sql.Tx, auth Auth) (err error) {
-	panic("unimplemented")
+	query := `
+		INSERT INTO auth (
+			public_id,
+			email,
+			password,
+			is_active,
+			role,
+			created_at,
+			updated_at
+		) VALUES (
+			$1, $2, $3, $4, $5, now(), now()
+		)
+	`
+
+	_, err = tx.ExecContext(ctx, query, auth.PublicId, auth.Email, auth.Password, auth.IsActive, auth.Role)
+
+	return err
 }
 
 // CreateEmployee implements repoContract.
 func (r repository) CreateEmployee(ctx context.Context, tx *sql.Tx, employee Employee) (err error) {
-	panic("unimplemented")
+	query := `
+		INSERT INTO employees (
+			public_id,
+			name,
+			profile,
+			auth_id,
+			created_at,
+			updated_at
+		) VALUES (
+			$1, $2, $3, $4, now(), now()
+		)
+	`
+
+	_, err = tx.ExecContext(ctx, query, employee.PublicId, employee.Name, employee.Profile, employee.AuthId)
+
+	return err
 }
 
 // FindAuthByEmail implements repoContract.

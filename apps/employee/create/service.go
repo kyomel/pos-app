@@ -56,7 +56,7 @@ func (s service) create(ctx context.Context, req CreateEmployeeRequest) (err err
 		return err
 	}
 
-	empModel := req.ToEmployeeModel(auth.PublicId)
+	empModel := req.ToEmployeeModel(authModel.PublicId)
 	if err := s.repo.CreateEmployee(ctx, tx, empModel); err != nil {
 		slog.ErrorContext(ctx, "[create] error when try to CreateEmployee", slog.Any("error", err.Error()))
 		return err

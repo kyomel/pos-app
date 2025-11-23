@@ -28,6 +28,10 @@ func NewErrorBadRequest(msg string, err error, opts ...OptResponse) Response {
 	return newError(http.StatusBadRequest, msg, err, opts...)
 }
 
+func NewErrorConflict(msg string, err error, opts ...OptResponse) Response {
+	return newError(http.StatusConflict, msg, err, opts...)
+}
+
 func NewErrorUnauthorized(msg string, err error, opts ...OptResponse) Response {
 	return newError(http.StatusUnauthorized, msg, err, opts...)
 }
